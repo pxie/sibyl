@@ -9,7 +9,8 @@ def rand(total_number):
 
     lines = []
     for i in range(total_number):
-        log.debug("line content: %s,%s", i, random.random())
-        lines.append([i, random.random()])
+        num = 0.05 * i + random.random()
+        log.debug("line content: %s,%s", i, num)
+        lines.append([i, num])
 
     return lines
