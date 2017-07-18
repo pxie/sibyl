@@ -1,0 +1,10 @@
+{
+  "entry-method": "sibyl.analytic.predict",
+  "non-conda-libs": [],
+  "conda-libs": [
+    "numpy",
+    "scipy",
+    "scikit-learn",
+    "pandas"
+  ]
+}
