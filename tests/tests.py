@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import os
 import json
 import sys
@@ -7,6 +9,8 @@ import unittest
 import sibyl.data_generator as dg
 import sibyl.analytic as ax
 from sibyl.logger import log
+import pandas as pd
+import matplotlib.pyplot as plt
 
 
 class TestDataGenerator(unittest.TestCase):
@@ -31,6 +35,17 @@ class TestAnalytic(unittest.TestCase):
         predict_json = linear_predict.predict(json.dumps(data))
         log.debug("predict_json: %s", predict_json)
 
+    def test_predict_with_data(self):
+        data = {"values": [
+            [1435556274138, 0.264158713731815, 0],
+            [1435557118934, 0.4872329925809995, 3],
+            [1435567118934, 0.7872329925809995, 3],
+            [1435577118934, 0.2872329925809995, 3]]
+        }
+        linear_predict = ax.LinearPredict()
+        predict_json = linear_predict.predict(json.dumps(data))
+        log.debug("predict_json: %s", predict_json)
+
     def test_draw(self):
         count = 100
         data = dg.rand(count)
@@ -50,8 +65,22 @@ class TestAnalytic(unittest.TestCase):
 
         predic_df = linear_predict.do_predict(tslist, regr)
 
-        linear_predict.draw(df, predic_df, regr)
+        draw(df, predic_df, regr)
 
+
+def draw(dataframe, predict_df, regr):
+    # 画图
+    # 1.真实的点
+    plt.scatter(dataframe['ts'], dataframe['meas'], color='blue')
+
+    # 未来的点
+    plt.scatter(predict_df['ts'], predict_df['meas'], color='green')
+
+    # 2.拟合的直线
+    all_data = pd.concat([dataframe, predict_df])
+    plt.plot(all_data['ts'].values.reshape(-1, 1),
+             regr.predict(all_data['ts'].values.reshape(-1, 1)), color='red', linewidth=1)
+    plt.show()
 
 if __name__ == "__main__":
     unittest.main()

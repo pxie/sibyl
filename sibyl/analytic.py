@@ -3,7 +3,6 @@
 import os
 import pandas as pd
 from sklearn import linear_model
-import matplotlib.pyplot as plt
 
 from logger import log
 from data_generator import rand
@@ -116,17 +115,3 @@ class LinearPredict:
         log.debug("after df2ts format, tslist: %s", tslist)
 
         return tslist
-
-    def draw(self, dataframe, predict_df, regr):
-        # 画图
-        # 1.真实的点
-        plt.scatter(dataframe['ts'], dataframe['meas'], color='blue')
-
-        # 未来的点
-        plt.scatter(predict_df['ts'], predict_df['meas'], color='green')
-
-        # 2.拟合的直线
-        all_data = pd.concat([dataframe, predict_df])
-        plt.plot(all_data['ts'].values.reshape(-1, 1),
-                 regr.predict(all_data['ts'].values.reshape(-1, 1)), color='red', linewidth=1)
-        plt.show()

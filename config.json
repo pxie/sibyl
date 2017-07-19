@@ -1,5 +1,5 @@
 {
-  "entry-method": "sibyl.analytic.predict",
+  "entry-method": "sibyl.LinearPredict.predict",
   "non-conda-libs": [],
   "conda-libs": [
     "numpy",
