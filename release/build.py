@@ -3,13 +3,14 @@ import os.path
 import shutil
 
 # make temp build folder
-dest = os.path.join(os.getcwd(), "build")
+release_dir = os.path.dirname(os.path.abspath(__file__))
+dest = os.path.join(release_dir, "build")
 if os.path.exists(dest):
     shutil.rmtree(dest)
 os.mkdir(dest)
 
 # copy source code in build folder
-root_dir = os.path.join(os.getcwd(), "../")
+root_dir = os.path.join(release_dir, "../")
 shutil.copytree(os.path.join(root_dir, "sibyl"), os.path.join(dest, "sibyl"))
 shutil.copy(os.path.join(root_dir, "config.json"), dest)
 
@@ -20,9 +21,10 @@ for subdir, dirs, files in os.walk(dest):
             os.remove(os.path.join(subdir, f))
 
 # remove zip build
-if os.path.exists("./sibyl.release.zip"):
-    os.remove("./sibyl.release.zip")
+zipfile = os.path.join(release_dir, "sibyl.release.zip")
+if os.path.exists(zipfile):
+    os.remove(zipfile)
 
 print("generate release build: sibyl.release.zip")
-shutil.make_archive("./sibyl.release", "zip", dest)
+shutil.make_archive(os.path.join(release_dir, "sibyl.release"), "zip", dest)
 shutil.rmtree(dest)

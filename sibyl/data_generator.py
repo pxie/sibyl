@@ -13,4 +13,4 @@ def rand(total_number):
         log.debug("line content: %s,%s", i, num)
         lines.append([i, num])
 
-    return lines
+    return {"values": lines}
