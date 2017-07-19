@@ -6,7 +6,7 @@ It is the Predix analytic demo for linear regression.
 
 ## release
 
-Get Predix analytics framework compatible [**zip file**](https://github.com/pxie/sibyl/raw/master/release/sibyl.release.zip) from release folder
+Get Predix analytics framework compatible [**zip file**](https://github.com/pxie/sibyl/raw/master/release/sibyl.release.zip) from release folder.
 
 ## setup local dev env
 
@@ -19,5 +19,7 @@ Get Predix analytics framework compatible [**zip file**](https://github.com/pxie
 1. `cd sibyl`
 2. `python tests/tests.py`
 3. the following linear regression chart will be presented
+   * the blue points are actual value
+   * the green points are predicted value
 
 ![linear](docs/example.png)
